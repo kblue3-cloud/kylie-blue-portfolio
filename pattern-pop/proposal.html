@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#FFF9EF" />
+    <meta name="description" content="Pattern Pop game proposal: research, narrative, interaction design, visual system, and development plan." />
+    <title>Pattern Pop — Game Proposal</title>
+    <link rel="stylesheet" href="proposal.css" />
+    <script src="proposal.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Skip to proposal</a>
+
+    <header class="proposal-header">
+      <a class="portfolio-mark" href="../index.html" aria-label="Kylie Blue portfolio home">
+        <span>KYLIE</span><span>BLUE</span>
+      </a>
+      <p>Pattern Pop / Game proposal</p>
+      <nav aria-label="Proposal links">
+        <a href="../index.html">Portfolio</a>
+        <a href="index.html" class="play-link">Play prototype <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+
+    <aside class="toc" aria-label="Proposal contents">
+      <p>Project map</p>
+      <ol>
+        <li><a href="#introduction" class="is-active"><span>01</span> Introduce</a></li>
+        <li><a href="#case-study"><span>02</span> Case study</a></li>
+        <li><a href="#ai-discussion"><span>03</span> AI discussion</a></li>
+        <li><a href="#narrative"><span>04</span> Narrative</a></li>
+        <li><a href="#journey"><span>05</span> Player journey</a></li>
+        <li><a href="#style-guide"><span>06</span> Style + sound</a></li>
+        <li><a href="#build-plan"><span>07</span> Build plan</a></li>
+      </ol>
+    </aside>
+
+    <main id="content">
+      <section class="proposal-section hero-section" id="introduction" aria-labelledby="intro-title">
+        <div class="section-label"><span>01</span><p>Introduce the game</p></div>
+        <div class="hero-copy">
+          <p class="eyebrow">Experimental visual puzzle game</p>
+          <h1 id="intro-title"><span>PATTERN</span><span>POP<i aria-hidden="true">●</i></span></h1>
+          <p class="hero-tagline">Every pattern has a story.</p>
+          <p class="hero-description">Pattern Pop is a short, colorful browser puzzle game where players explore a strange geometric world and discover hidden visual patterns. At first, the world looks random, but players gradually learn its rules by observing shapes, colors, sequences, and repetitions. By finding and activating the correct patterns, players transform the environment and bring the world into harmony.</p>
+          <div class="hero-actions">
+            <a class="pill-button dark" href="index.html">Play current prototype <span aria-hidden="true">→</span></a>
+            <a class="text-link" href="#journey">See the player journey ↓</a>
+          </div>
+        </div>
+
+        <div class="hero-world" role="img" aria-label="Original illustration of a colorful geometric Pattern Pop world">
+          <span class="world-orbit"></span>
+          <span class="geo geo-circle"></span>
+          <span class="geo geo-triangle"></span>
+          <span class="geo geo-square"></span>
+          <span class="geo geo-diamond"></span>
+          <span class="world-star">✦</span>
+          <span class="world-caption">Original concept illustration</span>
+        </div>
+
+        <dl class="project-facts">
+          <div><dt>Audience</dt><dd>Casual players, creative thinkers, and people who enjoy visual discovery.</dd></div>
+          <div><dt>Interaction</dt><dd>Click or tap shapes to identify and complete patterns.</dd></div>
+          <div><dt>Experience</dt><dd>Curiosity, experimentation, discovery, and satisfaction.</dd></div>
+          <div><dt>Format</dt><dd>Short browser game · HTML, CSS, and JavaScript.</dd></div>
+        </dl>
+      </section>
+
+      <section class="proposal-section case-section" id="case-study" aria-labelledby="case-title">
+        <div class="section-label"><span>02</span><p>Present the case study</p></div>
+        <div class="section-heading">
+          <p class="eyebrow">Reference game / Research to verify</p>
+          <h2 id="case-title">Learning through<br />experimentation.</h2>
+          <p>Little Alchemy 2 offers a useful reference for thinking about discovery without lengthy instruction. Its relevance here is structural: the player acts, sees an immediate response, and gradually builds a working theory of the system.</p>
+        </div>
+
+        <article class="reference-feature">
+          <div class="alchemy-visual" role="img" aria-label="Original diagram representing the combination of two elements into a new discovery, not a gameplay screenshot">
+            <span class="alchemy-element fire">Fire</span><span class="plus">+</span><span class="alchemy-element earth">Earth</span><span class="equals">→</span><span class="alchemy-element discovery">?</span>
+            <span class="visual-note">Original interaction diagram<br />Not a gameplay capture</span>
+          </div>
+          <div class="reference-copy">
+            <p class="reference-number">Reference 01</p>
+            <h3>Little Alchemy 2</h3>
+            <p class="credit">Created by Recloak</p>
+            <p>The game is proposed as a reference because its combination system encourages low-risk trials and uses visible outcomes to turn experiments into knowledge. This is a preliminary design comparison, not a report of my own completed play session.</p>
+            <div class="source-links">
+              <a href="https://littlealchemy2.com/" target="_blank" rel="noreferrer">Visit Little Alchemy 2 ↗</a>
+              <a href="https://recloak.com/" target="_blank" rel="noreferrer">Creator: Recloak ↗</a>
+            </div>
+            <p class="caption">Visual above: original Pattern Pop research diagram by Kylie Blue. It is not presented as an authentic Little Alchemy 2 screenshot.</p>
+          </div>
+        </article>
+
+        <div class="research-warning" role="note">
+          <span>!</span>
+          <p><strong>Research status:</strong> the moments and events below are preliminary examples to verify. Replace them with specific observations, screenshots, and notes from an actual play session before submission.</p>
+        </div>
+
+        <div class="moments-grid">
+          <article><span>Moment 01</span><h3>First successful combination</h3><p>Observe how the game marks a new discovery and whether that feedback changes the next action.</p></article>
+          <article><span>Moment 02</span><h3>An unsuccessful experiment</h3><p>Record what happens when a combination produces no discovery and whether retrying still feels inviting.</p></article>
+          <article><span>Moment 03</span><h3>Applying earlier knowledge</h3><p>Document one moment when a previous result suggests a new combination or direction.</p></article>
+        </div>
+
+        <div class="event-table-wrap" tabindex="0" aria-label="Scrollable preliminary player action event table">
+          <table>
+            <caption>Preliminary player-action events — verify through personal gameplay</caption>
+            <thead><tr><th>Player action</th><th>Game response</th><th>What the player may understand</th></tr></thead>
+            <tbody>
+              <tr><td>Combining two elements</td><td>A valid pairing may create and reveal a new element.</td><td>Some objects share a hidden relationship; experiments can expand the available system.</td></tr>
+              <tr><td>Trying a different combination</td><td>The elements may return without creating something new.</td><td>Not every trial succeeds, but failure narrows the set of possible rules.</td></tr>
+              <tr><td>Repeating an already discovered combination</td><td>The game may reproduce a known result instead of treating it as new.</td><td>Rules are consistent and discoveries can be remembered and reused.</td></tr>
+              <tr><td>Reviewing discovered elements</td><td>The collection presents what has already been found.</td><td>Progress is a growing visual vocabulary rather than a conventional score.</td></tr>
+              <tr><td>Using an earlier discovery to guide another attempt</td><td>A known result becomes material for a new experiment.</td><td>Knowledge can transfer forward and make later choices more intentional.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="editable-lab">
+          <div class="lab-heading"><div><p class="eyebrow">Research draft</p><h3>Play-session evidence plan</h3></div><span>Draft text · verify before submission</span></div>
+          <div class="field-grid">
+            <article class="static-field"><span>My gameplay observations</span><p>Draft to verify during play: Little Alchemy 2 appears to support experimentation by making combinations quick to try and visually easy to read. A successful combination introduces a new element, while an unsuccessful attempt allows the player to continue without a harsh penalty. During my own play session, I will verify the exact animations, interface messages, and sequence of actions that create this learning loop.</p></article>
+            <article class="static-field"><span>Three specific moments</span><ol><li><strong>First discovery —</strong> document the first successful combination, its visual response, and how it affects the next choice.</li><li><strong>Unsuccessful experiment —</strong> record one combination that produces no new result and how the interface encourages another attempt.</li><li><strong>Transferred knowledge —</strong> identify a moment when an earlier discovery suggests a later combination.</li></ol></article>
+            <article class="static-field"><span>What I learned</span><p>Draft conclusion: the most useful design principle is that experimentation feels inviting when actions are immediate, feedback is legible, and unsuccessful attempts do not erase progress. Pattern Pop applies this idea through shape selection: every click produces a visible response, hints support another attempt, and successful choices gradually restore the same geometric world.</p></article>
+            <div class="capture-placeholder">
+              <p>My research screenshots</p>
+              <label class="upload-label">Preview a screenshot<input type="file" accept="image/*" data-image-input /></label>
+              <div class="upload-preview" data-image-preview><span>No personal screenshot added yet.</span></div>
+              <small>Local preview only. Add the final credited image to the project folder before submission.</small>
+            </div>
+          </div>
+        </div>
+
+        <p class="section-conclusion"><strong>Design takeaway:</strong> Pattern Pop borrows the rhythm of experiment → visible response → revised understanding, while changing the interaction from object combination to visual pattern selection.</p>
+      </section>
+
+      <section class="proposal-section ai-section" id="ai-discussion" aria-labelledby="ai-title">
+        <div class="section-label"><span>03</span><p>Critical discussion with AI</p></div>
+        <div class="section-heading compact">
+          <p class="eyebrow">AI as a design partner, not evidence</p>
+          <h2 id="ai-title">Question. Challenge.<br />Revise. Decide.</h2>
+          <p>This section separates AI suggestions from decisions I still need to verify. The value of the process is not agreement; it is using questions to make the game more specific and buildable.</p>
+        </div>
+
+        <div class="ai-four-part">
+          <article class="ai-card coral-card"><span>A</span><h3>Initial idea + suggestions</h3><p>The original concept focused on matching repeating geometric patterns. AI suggested organizing the experience into three stages, using click-based interaction, and giving immediate visual feedback. This helped turn a broad idea into a short sequence with a beginning, development, and ending.</p></article>
+          <article class="ai-card turquoise-card"><span>B</span><h3>What I verified / will verify</h3><ul><li>A three-stage structure is achievable for a small browser prototype.</li><li>Visual feedback can help communicate puzzle rules.</li><li>Predetermined solutions make each puzzle testable.</li></ul><p class="micro-note">These are design decisions and implementation checks—not independent research findings.</p></article>
+          <article class="ai-card yellow-card"><span>C</span><h3>Gaps + limitations</h3><ol><li>The concept could become too predictable and feel like an ordinary matching game.</li><li>Environmental change did not yet carry enough narrative meaning.</li><li>The technical scope for changing patterns needed clearer boundaries.</li></ol></article>
+          <article class="ai-card lavender-card"><span>D</span><h3>Revision principle</h3><p>Keep the solutions fixed and understandable, but let motion, color, and rearrangement alter the player's first impression. The final prototype should make each correct choice visibly repair part of the same world.</p></article>
+        </div>
+
+        <div class="conversation-draft">
+          <div class="draft-banner"><strong>Completed draft example</strong><span>Verify against your actual AI conversation and add screenshots if required.</span></div>
+          <div class="conversation-grid">
+            <article class="conversation-item"><span>01 / My original concern</span><p>My original concern was that a simple pattern-matching game might be too predictable. I wanted the world to feel surprising while keeping the puzzles understandable.</p></article>
+            <article class="conversation-item"><span>02 / AI suggestion</span><p>Keep the puzzle rules consistent but use movement, color changes, and rearrangements to encourage players to reconsider their first impressions.</p></article>
+            <article class="conversation-item"><span>03 / My challenge or follow-up</span><p>How can movement and color make the world feel surprising without making the actual pattern rules confusing? I also need the idea to remain realistic for a short HTML, CSS, and JavaScript prototype with only three stages.</p></article>
+            <article class="conversation-item"><span>04 / Revised suggestion</span><p>Use one clear rule per stage and keep every solution predetermined. Add surprise through the environment’s response rather than through ambiguous answers: restore color after Stage 1, transform the outlier after Stage 2, and connect the full composition after Stage 3. Reuse the same click interaction and visual components so the scope stays manageable.</p></article>
+            <article class="conversation-item"><span>05 / My conclusion</span><p>I will keep the solutions predetermined while using animation and visual changes to make discovery feel more experimental.</p></article>
+            <article class="conversation-item"><span>06 / Design decision</span><p>Each completed stage restores one layer of the world: rhythm, consistency, then connection. Animation communicates that the player is changing a shared environment rather than answering unrelated questions.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="proposal-section narrative-section" id="narrative" aria-labelledby="narrative-title">
+        <div class="section-label"><span>04</span><p>Narrative + concept</p></div>
+        <div class="narrative-layout">
+          <div class="narrative-copy">
+            <p class="eyebrow">A world that teaches through change</p>
+            <h2 id="narrative-title">From scattered<br />to connected.</h2>
+            <p class="lead">Pattern Pop takes place in a colorful world made entirely from geometric forms. At first, its objects appear scattered and unrelated. The player discovers that the world is not random: it follows a visual language built from repetition, difference, and connection.</p>
+            <p>The player is an observer and experimenter—not a named hero. Each click is a hypothesis. Each response teaches one small part of the rule. As the three stages are solved, still shapes begin to move, isolated colors return, and separate pieces join into one composition.</p>
+            <blockquote>Story is expressed through the environment becoming legible—not through dialogue or exposition.</blockquote>
+          </div>
+          <div class="world-diagram" role="img" aria-label="Original before-and-after illustration showing scattered shapes becoming a connected composition">
+            <div class="diagram-half scattered"><span class="diagram-label">Before / scattered</span><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="diagram-arrow" aria-hidden="true">→</div>
+            <div class="diagram-half connected"><span class="diagram-label">After / connected</span><span class="connection-line"></span><i></i><i></i><i></i><i></i><i></i></div>
+            <p>Original narrative diagram · Pattern Pop</p>
+          </div>
+        </div>
+        <div class="research-influence"><span>Research → concept</span><p>The proposed case study focuses attention on how experimentation can teach a hidden system. Pattern Pop adapts that principle by making the system spatial and visual: instead of combining objects, the player notices relationships already present in the composition.</p></div>
+      </section>
+
+      <section class="proposal-section journey-section" id="journey" aria-labelledby="journey-title">
+        <div class="section-label"><span>05</span><p>Interaction + player journey</p></div>
+        <div class="section-heading">
+          <p class="eyebrow">One gesture, five moments</p>
+          <h2 id="journey-title">Observe. Select.<br />Restore.</h2>
+          <p>The interaction stays consistent from start to finish: choose a shape, read the response, and revise if necessary. Complexity comes from the relationships between shapes—not from adding controls.</p>
+        </div>
+
+        <div class="flowchart" aria-label="Game flow from opening through three stages to ending, with retry loops for incorrect answers">
+          <div class="flow-node opening-node"><span>00</span><strong>Opening</strong><small>Look closer</small></div><i>→</i>
+          <div class="flow-node"><span>01</span><strong>Find the rhythm</strong><small>Continue a sequence</small><b>↺ Gentle retry</b></div><i>→</i>
+          <div class="flow-node"><span>02</span><strong>Break the pattern</strong><small>Find the outlier</small><b>↺ Gentle retry</b></div><i>→</i>
+          <div class="flow-node"><span>03</span><strong>Connect everything</strong><small>Complete the grid</small><b>↺ Gentle retry</b></div><i>→</i>
+          <div class="flow-node ending-node"><span>04</span><strong>Ending</strong><small>World in harmony</small></div>
+        </div>
+
+        <div class="storyboard">
+          <article class="story-card">
+            <div class="story-visual opening-sketch"><strong>PP</strong><span>●</span><span>▲</span><span>■</span></div>
+            <header><span>01</span><h3>Opening</h3></header>
+            <dl><div><dt>Player</dt><dd>Enters the world.</dd></div><div><dt>Response</dt><dd>Shapes float and react gently.</dd></div><div><dt>Learns</dt><dd>Look closely; shapes are meaningful.</dd></div><div><dt>Continues</dt><dd>Selects “Enter the world.”</dd></div></dl>
+          </article>
+          <article class="story-card">
+            <div class="story-visual rhythm-sketch"><span>●</span><i></i><span>▲</span><i></i><span>●</span><i></i><span>?</span></div>
+            <header><span>02</span><h3>Find the rhythm</h3></header>
+            <dl><div><dt>Player</dt><dd>Chooses the next shape.</dd></div><div><dt>Response</dt><dd>Correct: sequence animates. Incorrect: gentle wobble.</dd></div><div><dt>Learns</dt><dd>Rules repeat and feedback is safe.</dd></div><div><dt>Continues</dt><dd>Tries again or moves forward.</dd></div></dl>
+          </article>
+          <article class="story-card">
+            <div class="story-visual outlier-sketch"><span>●</span><span>■</span><span>●</span><span>▲</span><span>●</span></div>
+            <header><span>03</span><h3>Break the pattern</h3></header>
+            <dl><div><dt>Player</dt><dd>Selects the object that breaks the rule.</dd></div><div><dt>Response</dt><dd>The outlier transforms when found.</dd></div><div><dt>Learns</dt><dd>Difference can reveal the shared rule.</dd></div><div><dt>Continues</dt><dd>Uses comparison in the final stage.</dd></div></dl>
+          </article>
+          <article class="story-card">
+            <div class="story-visual grid-sketch"><span>●</span><span>▲</span><span>●</span><span>▲</span><span>?</span><span>▲</span><span>●</span><span>?</span><span>●</span></div>
+            <header><span>04</span><h3>Connect everything</h3></header>
+            <dl><div><dt>Player</dt><dd>Fills two missing positions.</dd></div><div><dt>Response</dt><dd>Rows and columns connect visually.</dd></div><div><dt>Learns</dt><dd>Earlier rules work at a larger scale.</dd></div><div><dt>Continues</dt><dd>Completes the composition.</dd></div></dl>
+          </article>
+          <article class="story-card">
+            <div class="story-visual ending-sketch"><span class="mini-orbit"></span><strong>✦</strong><i>●</i><i>▲</i><i>■</i></div>
+            <header><span>05</span><h3>Ending</h3></header>
+            <dl><div><dt>Player</dt><dd>Observes the unified artwork.</dd></div><div><dt>Response</dt><dd>Color, movement, and sound resolve together.</dd></div><div><dt>Learns</dt><dd>The hidden connections shaped the world.</dd></div><div><dt>Continues</dt><dd>Plays again or returns to start.</dd></div></dl>
+          </article>
+        </div>
+      </section>
+
+      <section class="proposal-section style-section" id="style-guide" aria-labelledby="style-title">
+        <div class="section-label"><span>06</span><p>Style + sound guide</p></div>
+        <div class="section-heading compact">
+          <p class="eyebrow">A visual language with personality</p>
+          <h2 id="style-title">Playful precision.</h2>
+          <p>The system combines clear structure with slightly imperfect shapes and surreal movement. It should feel expressive without obscuring the puzzle.</p>
+        </div>
+
+        <div class="palette-grid" aria-label="Pattern Pop color palette">
+          <div style="--swatch:#FF6B6B"><span>Coral</span><code>#FF6B6B</code><small>Attention + warmth</small></div>
+          <div style="--swatch:#48DAD0"><span>Turquoise</span><code>#48DAD0</code><small>Restoration + success</small></div>
+          <div style="--swatch:#FFD95A"><span>Sunny yellow</span><code>#FFD95A</code><small>Discovery + energy</small></div>
+          <div style="--swatch:#B9A0F8"><span>Lavender</span><code>#B9A0F8</code><small>Wonder + depth</small></div>
+          <div style="--swatch:#4263EB"><span>Cobalt</span><code>#4263EB</code><small>Structure + focus</small></div>
+          <div style="--swatch:#FFF9EF"><span>Warm cream</span><code>#FFF9EF</code><small>Space + softness</small></div>
+          <div class="dark-swatch" style="--swatch:#25243A"><span>Dark purple</span><code>#25243A</code><small>Contrast + clarity</small></div>
+        </div>
+
+        <div class="guide-grid">
+          <article class="type-guide"><p class="guide-number">A / Type</p><h3>Rounded display,<br /><span>clean body.</span></h3><p>Bold, compressed display type gives the game a graphic voice. A straightforward sans-serif keeps instructions and research readable.</p><dl><div><dt>Display</dt><dd>Arial Rounded / Trebuchet fallback</dd></div><div><dt>Body</dt><dd>Avenir / Arial fallback</dd></div></dl></article>
+          <article class="shape-guide"><p class="guide-number">B / Shape</p><div class="shape-sample"><i></i><i></i><i></i><i></i></div><h3>Familiar forms,<br />unfamiliar behavior.</h3><p>Circles, triangles, squares, and soft irregular forms are easy to name. Rotation, bounce, overlap, and scale give them personality.</p></article>
+          <article class="interface-guide"><p class="guide-number">C / Interface</p><button type="button">Select a shape <span>→</span></button><div class="feedback-samples"><span class="positive">✓ Pattern found</span><span class="try-again">× Look once more</span></div><p>Thick outlines, large targets, icons, and text ensure that feedback never depends on color alone.</p></article>
+          <article class="motion-guide"><p class="guide-number">D / Motion</p><div class="motion-track"><i></i><span>Anticipate</span><span>Respond</span><span>Settle</span></div><p>Motion should explain relationships: a quick selection pop, a gentle wrong-answer wobble, and a larger coordinated stage resolution. Reduced-motion preferences remove nonessential animation.</p></article>
+        </div>
+
+        <div class="sound-guide">
+          <div><p class="eyebrow">Optional sound palette</p><h3>Small sounds,<br />clear meaning.</h3><p>Generated sound supports feedback without becoming required. Every sound event has a matching visual state. Background music remains optional and outside the minimum prototype scope.</p></div>
+          <div class="sound-list">
+            <button type="button" data-tone="pop"><span>01</span><strong>Soft pop</strong><small>Shape selection</small><i>▶</i></button>
+            <button type="button" data-tone="correct"><span>02</span><strong>Gentle chime</strong><small>Correct answer</small><i>▶</i></button>
+            <button type="button" data-tone="wrong"><span>03</span><strong>Soft low note</strong><small>Try again</small><i>▶</i></button>
+            <button type="button" data-tone="celebrate"><span>04</span><strong>Rising cluster</strong><small>Stage complete</small><i>▶</i></button>
+          </div>
+        </div>
+
+        <div class="inspiration-note"><strong>Borrowing / changing</strong><p>The proposal borrows the principle of low-risk experimentation from Little Alchemy 2. Pattern Pop changes the subject, interaction, visual system, and narrative response: the player selects relationships in a geometric composition, and each answer visibly restores one shared world. All illustrations on this page are original proposal graphics unless explicitly credited otherwise.</p></div>
+      </section>
+
+      <section class="proposal-section plan-section" id="build-plan" aria-labelledby="plan-title">
+        <div class="section-label"><span>07</span><p>Two-week build plan</p></div>
+        <div class="section-heading compact">
+          <p class="eyebrow">Realistic scope, testable outcome</p>
+          <h2 id="plan-title">Build. Observe.<br />Refine.</h2>
+          <p>The plan prioritizes a complete, short experience over adding more features. The final result should work from opening to ending before visual polish expands.</p>
+        </div>
+
+        <div class="timeline">
+          <article class="week-card build-week">
+            <header><span>Week 2</span><h3>Build the prototype</h3><p>One complete interaction loop</p></header>
+            <ol>
+              <li><span>01</span>Set up the HTML, CSS, and JavaScript structure.</li>
+              <li><span>02</span>Create the opening screen and responsive layout.</li>
+              <li><span>03</span>Implement click/tap selection and shared puzzle data.</li>
+              <li><span>04</span>Build all three deterministic puzzle stages.</li>
+              <li><span>05</span>Add feedback, transitions, simple animation, and optional sound.</li>
+              <li><span>06</span>Create the ending and verify the complete path.</li>
+            </ol>
+            <footer><strong>Deliverable</strong><p>A start-to-finish browser prototype with three solvable stages.</p></footer>
+          </article>
+          <article class="week-card test-week">
+            <header><span>Week 3</span><h3>Test and refine</h3><p>Clarity before complexity</p></header>
+            <ol>
+              <li><span>01</span>Observe a small number of players using the game.</li>
+              <li><span>02</span>Record where rules or feedback are confusing.</li>
+              <li><span>03</span>Adjust puzzle difficulty, hints, and response timing.</li>
+              <li><span>04</span>Test desktop and mobile layouts.</li>
+              <li><span>05</span>Check keyboard access and reduced motion.</li>
+              <li><span>06</span>Refine typography, color, sound, animation, and bugs.</li>
+            </ol>
+            <footer><strong>Deliverable</strong><p>A tested, documented, and publishable final build.</p></footer>
+          </article>
+        </div>
+
+        <div class="scope-strip"><strong>Scope boundary</strong><p>No 3D graphics, procedural generation, accounts, leaderboards, timers, or dependencies are required. Three authored puzzles, one consistent input, and a polished response system are enough.</p></div>
+      </section>
+    </main>
+
+    <footer class="proposal-footer">
+      <div><p>Pattern Pop</p><h2>EVERY PATTERN<br />HAS A STORY.</h2></div>
+      <div class="credits">
+        <p><strong>Original concept + page illustrations</strong><br />Kylie Blue</p>
+        <p><strong>Reference game</strong><br /><a href="https://littlealchemy2.com/" target="_blank" rel="noreferrer">Little Alchemy 2</a> by <a href="https://recloak.com/" target="_blank" rel="noreferrer">Recloak</a></p>
+        <p><strong>Research integrity</strong><br />Preliminary observations are labeled. Personal play evidence still needs to be added.</p>
+      </div>
+      <a class="pill-button light" href="#content">Back to top <span aria-hidden="true">↑</span></a>
+    </footer>
+  </body>
+</html>

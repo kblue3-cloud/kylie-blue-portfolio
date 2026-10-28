@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#FFF9EF" />
+    <meta name="description" content="Pattern Pop — a playful visual puzzle about finding hidden connections." />
+    <title>Pattern Pop</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#game">Skip to game</a>
+
+    <div class="world" id="game" aria-live="polite">
+      <header class="topbar">
+        <button class="brand" type="button" data-action="home" aria-label="Return to Pattern Pop start screen">
+          <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span>PATTERN POP</span>
+        </button>
+
+        <div class="game-controls">
+          <a class="control-button portfolio-control" href="../index.html">Portfolio ↗</a>
+          <button class="control-button restart-control is-hidden" type="button" data-action="restart">
+            <span aria-hidden="true">↻</span> Restart
+          </button>
+          <button class="control-button sound-control" type="button" data-action="sound" aria-pressed="false" aria-label="Turn sound on">
+            <span class="sound-icon" aria-hidden="true">◖</span>
+            <span class="sound-label">Sound off</span>
+          </button>
+        </div>
+      </header>
+
+      <main class="screen-container">
+        <section class="screen opening-screen is-active" data-screen="opening" aria-labelledby="opening-title">
+          <div class="opening-copy">
+            <p class="kicker"><span>01</span> A visual puzzle in three acts</p>
+            <h1 id="opening-title" tabindex="-1"><span>PATTERN</span><span>POP<i aria-hidden="true">●</i></span></h1>
+            <p class="tagline">Every pattern has a story.</p>
+            <div class="opening-actions">
+              <button class="primary-button" type="button" data-action="start">
+                <span>Enter the world</span><span aria-hidden="true">→</span>
+              </button>
+              <p>Look closer. Find what connects.</p>
+            </div>
+          </div>
+
+          <div class="hero-art" aria-hidden="true">
+            <div class="art-orbit orbit-one"><span class="shape shape-circle coral"></span></div>
+            <div class="art-orbit orbit-two"><span class="shape shape-triangle cobalt"></span></div>
+            <div class="art-orbit orbit-three"><span class="shape shape-square yellow"></span></div>
+            <div class="hero-blob turquoise"></div>
+            <div class="hero-ring"></div>
+            <div class="hero-dot-grid"></div>
+            <span class="spark spark-one">✦</span><span class="spark spark-two">✦</span>
+          </div>
+
+          <p class="opening-footnote">Observe · Select · Restore</p>
+        </section>
+
+        <section class="screen puzzle-screen" data-screen="puzzle" aria-labelledby="stage-title">
+          <div class="stage-intro">
+            <p class="stage-counter" id="stage-counter">01 / 03</p>
+            <div>
+              <p class="stage-kicker" id="stage-kicker"></p>
+              <h2 id="stage-title" tabindex="-1"></h2>
+            </div>
+            <p class="stage-narrative" id="stage-narrative"></p>
+          </div>
+
+          <div class="puzzle-card" id="puzzle-card">
+            <div class="card-topline">
+              <p id="puzzle-instruction"></p>
+              <span class="pattern-badge" id="pattern-badge">Repeat</span>
+            </div>
+            <div class="puzzle-board" id="puzzle-board"></div>
+            <div class="feedback" id="feedback" role="status" aria-live="assertive">
+              <span class="feedback-icon" aria-hidden="true">✦</span>
+              <span class="feedback-text">Take your time. The pattern is waiting.</span>
+            </div>
+          </div>
+
+          <div class="stage-progress" aria-label="Game progress">
+            <span class="progress-line"><i id="progress-fill"></i></span>
+            <span id="progress-label">World restored: 0%</span>
+          </div>
+        </section>
+
+        <section class="screen ending-screen" data-screen="ending" aria-labelledby="ending-title">
+          <div class="ending-art" aria-hidden="true">
+            <div class="ending-sun"></div>
+            <div class="ending-orbit"></div>
+            <span class="ending-shape e-one shape shape-circle coral"></span>
+            <span class="ending-shape e-two shape shape-triangle cobalt"></span>
+            <span class="ending-shape e-three shape shape-square yellow"></span>
+            <span class="ending-shape e-four shape shape-diamond lavender"></span>
+            <span class="ending-shape e-five shape shape-circle turquoise"></span>
+            <span class="ending-spark">✦</span>
+          </div>
+
+          <div class="ending-copy">
+            <p class="kicker"><span>03</span> The world is in tune</p>
+            <h2 id="ending-title" tabindex="-1">EVERY PATTERN<br />HAS A <em>STORY.</em></h2>
+            <p>You found the connections hiding in plain sight.</p>
+            <div class="ending-actions">
+              <button class="primary-button" type="button" data-action="play-again">
+                <span>Play again</span><span aria-hidden="true">↻</span>
+              </button>
+              <button class="text-button" type="button" data-action="home">Back to start</button>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <div class="transition-wipe" aria-hidden="true"><span></span><span></span><span></span></div>
+    </div>
+  </body>
+</html>
