@@ -155,6 +155,7 @@ h1:focus, h2:focus { outline: none; }
 
 .sequence-layout { width: 100%; display: grid; gap: 28px; }
 .sequence-row, .choice-row, .odd-grid { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: clamp(10px, 2.2vw, 28px); }
+.sequence-row.is-long { justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; padding: 7px 8px 13px; scrollbar-color: var(--cobalt) transparent; }
 .sequence-connector { width: clamp(12px, 2vw, 27px); height: 2px; background: var(--ink); opacity: .35; }
 .token, .choice-token, .odd-token, .grid-token { position: relative; display: grid; place-items: center; width: clamp(58px, 7vw, 92px); aspect-ratio: 1; flex: 0 0 auto; }
 .token-shape { width: 64%; aspect-ratio: 1; border: 3px solid var(--ink); background: var(--token-color); transition: transform 260ms var(--ease); }
@@ -182,7 +183,7 @@ h1:focus, h2:focus { outline: none; }
 @keyframes morph-shape { 35% { transform: scale(.2) rotate(120deg); } 100% { transform: scale(1) rotate(0); border-radius: 50%; background: var(--turquoise); } }
 
 .connect-layout { width: 100%; display: grid; grid-template-columns: minmax(240px, 1fr) minmax(260px, .8fr); align-items: center; gap: clamp(26px, 5vw, 80px); }
-.pattern-grid { justify-self: end; display: grid; grid-template-columns: repeat(3, clamp(58px, 6.4vw, 82px)); gap: 8px; padding: 12px; border: 2px solid var(--ink); border-radius: 22px; background: var(--ink); }
+.pattern-grid { justify-self: end; display: grid; grid-template-columns: repeat(var(--grid-size, 3), clamp(52px, 5.8vw, 78px)); gap: 8px; padding: 12px; border: 2px solid var(--ink); border-radius: 22px; background: var(--ink); }
 .grid-token { width: 100%; background: var(--cream); border-radius: 12px; }
 .grid-token .token { width: 100%; }
 .grid-token.is-target { border: 2px dashed var(--cream); color: var(--cream); background: var(--cobalt); font-size: 25px; font-weight: 900; }
@@ -259,7 +260,7 @@ h1:focus, h2:focus { outline: none; }
   .odd-grid { gap: 6px; }
   .odd-token { width: 61px; }
   .connect-layout { grid-template-columns: 1fr; gap: 20px; }
-  .pattern-grid { justify-self: center; grid-template-columns: repeat(3, 58px); }
+  .pattern-grid { justify-self: center; grid-template-columns: repeat(var(--grid-size, 3), 52px); }
   .connect-choices { text-align: center; }
   .connect-choices .choice-row { justify-content: center; }
   .ending-screen { padding: 30px 0 55px; }
@@ -279,7 +280,7 @@ h1:focus, h2:focus { outline: none; }
   .stage-intro h2 { font-size: 39px; }
   .token, .choice-token, .grid-token { width: 48px; }
   .odd-token { width: 55px; }
-  .pattern-grid { grid-template-columns: repeat(3, 51px); }
+  .pattern-grid { grid-template-columns: repeat(var(--grid-size, 3), 48px); }
 }
 
 @media (prefers-reduced-motion: reduce) {

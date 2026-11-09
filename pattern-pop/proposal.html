@@ -146,8 +146,8 @@
         </div>
 
         <div class="ai-four-part">
-          <article class="ai-card coral-card"><span>A</span><h3>Initial idea + suggestions</h3><p>The original concept focused on matching repeating geometric patterns. AI suggested organizing the experience into three stages, using click-based interaction, and giving immediate visual feedback. This helped turn a broad idea into a short sequence with a beginning, development, and ending.</p></article>
-          <article class="ai-card turquoise-card"><span>B</span><h3>What I verified / will verify</h3><ul><li>A three-stage structure is achievable for a small browser prototype.</li><li>Visual feedback can help communicate puzzle rules.</li><li>Predetermined solutions make each puzzle testable.</li></ul><p class="micro-note">These are design decisions and implementation checks—not independent research findings.</p></article>
+          <article class="ai-card coral-card"><span>A</span><h3>Initial idea + suggestions</h3><p>The original concept focused on matching repeating geometric patterns. AI suggested organizing the experience into three acts, using click-based interaction, and giving immediate visual feedback. Week 2 expands that structure into two levels per act so players can practice a rule before facing its harder version.</p></article>
+          <article class="ai-card turquoise-card"><span>B</span><h3>What I verified / will verify</h3><ul><li>A three-act, six-level structure is achievable for a small browser prototype.</li><li>Visual feedback can help communicate puzzle rules.</li><li>Predetermined solutions make each puzzle testable.</li></ul><p class="micro-note">These are design decisions and implementation checks—not independent research findings.</p></article>
           <article class="ai-card yellow-card"><span>C</span><h3>Gaps + limitations</h3><ol><li>The concept could become too predictable and feel like an ordinary matching game.</li><li>Environmental change did not yet carry enough narrative meaning.</li><li>The technical scope for changing patterns needed clearer boundaries.</li></ol></article>
           <article class="ai-card lavender-card"><span>D</span><h3>Revision principle</h3><p>Keep the solutions fixed and understandable, but let motion, color, and rearrangement alter the player's first impression. The final prototype should make each correct choice visibly repair part of the same world.</p></article>
         </div>
@@ -157,8 +157,8 @@
           <div class="conversation-grid">
             <article class="conversation-item"><span>01 / My original concern</span><p>My original concern was that a simple pattern-matching game might be too predictable. I wanted the world to feel surprising while keeping the puzzles understandable.</p></article>
             <article class="conversation-item"><span>02 / AI suggestion</span><p>Keep the puzzle rules consistent but use movement, color changes, and rearrangements to encourage players to reconsider their first impressions.</p></article>
-            <article class="conversation-item"><span>03 / My challenge or follow-up</span><p>How can movement and color make the world feel surprising without making the actual pattern rules confusing? I also need the idea to remain realistic for a short HTML, CSS, and JavaScript prototype with only three stages.</p></article>
-            <article class="conversation-item"><span>04 / Revised suggestion</span><p>Use one clear rule per stage and keep every solution predetermined. Add surprise through the environment’s response rather than through ambiguous answers: restore color after Stage 1, transform the outlier after Stage 2, and connect the full composition after Stage 3. Reuse the same click interaction and visual components so the scope stays manageable.</p></article>
+            <article class="conversation-item"><span>03 / My challenge or follow-up</span><p>How can movement and color make the world feel surprising without making the pattern rules confusing? I also want the levels to become meaningfully harder while keeping the project realistic for a short HTML, CSS, and JavaScript prototype.</p></article>
+            <article class="conversation-item"><span>04 / Revised suggestion</span><p>Use two levels inside each act: introduce one rule, then extend it. Act I grows from an AB rhythm to an AAB phrase; Act II grows from alternating pairs to a three-shape cycle; Act III grows from a 3×3 checkerboard to a three-shape 4×4 system. Reuse the same click interaction and components so the larger game stays manageable.</p></article>
             <article class="conversation-item"><span>05 / My conclusion</span><p>I will keep the solutions predetermined while using animation and visual changes to make discovery feel more experimental.</p></article>
             <article class="conversation-item"><span>06 / Design decision</span><p>Each completed stage restores one layer of the world: rhythm, consistency, then connection. Animation communicates that the player is changing a shared environment rather than answering unrelated questions.</p></article>
           </div>
@@ -172,7 +172,7 @@
             <p class="eyebrow">A world that teaches through change</p>
             <h2 id="narrative-title">From scattered<br />to connected.</h2>
             <p class="lead">Pattern Pop takes place in a colorful world made entirely from geometric forms. At first, its objects appear scattered and unrelated. The player discovers that the world is not random: it follows a visual language built from repetition, difference, and connection.</p>
-            <p>The player is an observer and experimenter—not a named hero. Each click is a hypothesis. Each response teaches one small part of the rule. As the three stages are solved, still shapes begin to move, isolated colors return, and separate pieces join into one composition.</p>
+            <p>The player is an observer and experimenter—not a named hero. Each click is a hypothesis. Each response teaches one small part of the rule. Across six levels in three acts, still shapes begin to move, isolated colors return, and separate pieces join into one composition.</p>
             <blockquote>Story is expressed through the environment becoming legible—not through dialogue or exposition.</blockquote>
           </div>
           <div class="world-diagram" role="img" aria-label="Original before-and-after illustration showing scattered shapes becoming a connected composition">
@@ -193,11 +193,11 @@
           <p>The interaction stays consistent from start to finish: choose a shape, read the response, and revise if necessary. Complexity comes from the relationships between shapes—not from adding controls.</p>
         </div>
 
-        <div class="flowchart" aria-label="Game flow from opening through three stages to ending, with retry loops for incorrect answers">
+        <div class="flowchart" aria-label="Game flow from opening through three acts and six levels to the ending, with retry loops for incorrect answers">
           <div class="flow-node opening-node"><span>00</span><strong>Opening</strong><small>Look closer</small></div><i>→</i>
-          <div class="flow-node"><span>01</span><strong>Find the rhythm</strong><small>Continue a sequence</small><b>↺ Gentle retry</b></div><i>→</i>
-          <div class="flow-node"><span>02</span><strong>Break the pattern</strong><small>Find the outlier</small><b>↺ Gentle retry</b></div><i>→</i>
-          <div class="flow-node"><span>03</span><strong>Connect everything</strong><small>Complete the grid</small><b>↺ Gentle retry</b></div><i>→</i>
+          <div class="flow-node"><span>ACT I</span><strong>Find the rhythm</strong><small>Levels 1–2 · Repeat</small><b>↺ Gentle retry</b></div><i>→</i>
+          <div class="flow-node"><span>ACT II</span><strong>Break the pattern</strong><small>Levels 3–4 · Compare</small><b>↺ Gentle retry</b></div><i>→</i>
+          <div class="flow-node"><span>ACT III</span><strong>Connect everything</strong><small>Levels 5–6 · Synthesize</small><b>↺ Gentle retry</b></div><i>→</i>
           <div class="flow-node ending-node"><span>04</span><strong>Ending</strong><small>World in harmony</small></div>
         </div>
 
@@ -283,11 +283,11 @@
               <li><span>01</span>Set up the HTML, CSS, and JavaScript structure.</li>
               <li><span>02</span>Create the opening screen and responsive layout.</li>
               <li><span>03</span>Implement click/tap selection and shared puzzle data.</li>
-              <li><span>04</span>Build all three deterministic puzzle stages.</li>
+              <li><span>04</span>Build six deterministic levels across three puzzle acts.</li>
               <li><span>05</span>Add feedback, transitions, simple animation, and optional sound.</li>
               <li><span>06</span>Create the ending and verify the complete path.</li>
             </ol>
-            <footer><strong>Deliverable</strong><p>A start-to-finish browser prototype with three solvable stages.</p></footer>
+            <footer><strong>Deliverable</strong><p>A start-to-finish browser prototype with six increasingly difficult levels.</p></footer>
           </article>
           <article class="week-card test-week">
             <header><span>Week 3</span><h3>Test and refine</h3><p>Clarity before complexity</p></header>

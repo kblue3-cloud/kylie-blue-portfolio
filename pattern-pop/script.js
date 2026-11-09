@@ -2,43 +2,82 @@
 
 const PUZZLES = [
   {
-    id: "rhythm",
+    id: "rhythm-one",
     number: "01",
-    kicker: "First movement",
+    kicker: "Act I · Level 1 · Warm-up",
     title: "Find the rhythm",
     narrative: "The shapes are humming in a loop. Listen with your eyes and give the sequence its next beat.",
     instruction: "Which shape continues the rhythm?",
     badge: "Repeat",
+    difficulty: "Easy",
     type: "sequence",
     sequence: ["circle", "triangle", "circle", "triangle", null],
+    sequenceLabel: "Circle, triangle, circle, triangle, missing shape",
     choices: ["triangle", "square", "circle"],
     answer: "circle",
     hint: "Try reading the shapes in pairs: first, second… first, second…",
     success: "Yes — circle and triangle take turns. The rhythm is awake!"
   },
   {
-    id: "outlier",
+    id: "rhythm-two",
     number: "02",
-    kicker: "Second movement",
+    kicker: "Act I · Level 2 · Building",
+    title: "Stretch the rhythm",
+    narrative: "The loop has grown longer. This time, two matching beats arrive before the pattern changes.",
+    instruction: "Complete the longer repeating phrase.",
+    badge: "Group",
+    difficulty: "Medium",
+    type: "sequence",
+    sequence: ["circle", "circle", "triangle", "circle", "circle", "triangle", "circle", "circle", null],
+    sequenceLabel: "Circle, circle, triangle, circle, circle, triangle, circle, circle, missing shape",
+    choices: ["square", "triangle", "circle"],
+    answer: "triangle",
+    hint: "Break the line into groups of three. Each group uses two circles, then one other shape.",
+    success: "Exactly — two circles lead into a triangle. The longer rhythm now moves as one!"
+  },
+  {
+    id: "outlier-one",
+    number: "03",
+    kicker: "Act II · Level 3 · Compare",
     title: "Break the pattern",
     narrative: "Most shapes know the dance. One has forgotten the step — find the shape that breaks the alternating rule.",
     instruction: "Select the shape that does not belong.",
     badge: "Compare",
+    difficulty: "Medium",
     type: "outlier",
     items: ["circle", "square", "circle", "square", "triangle", "square", "circle", "square"],
+    itemsLabel: "Alternating circle and square pattern with one outlier",
     answer: 4,
     hint: "Follow every other shape. The odd positions should all match each other.",
     success: "Found it — that triangle interrupted the circle–square dance!"
   },
   {
-    id: "connect",
-    number: "03",
-    kicker: "Final movement",
-    title: "Connect everything",
+    id: "outlier-two",
+    number: "04",
+    kicker: "Act II · Level 4 · Challenge",
+    title: "Follow the cycle",
+    narrative: "Three shapes now travel as a repeating phrase. One position has copied the wrong neighbor.",
+    instruction: "Find the shape that breaks the three-part cycle.",
+    badge: "Cycle",
+    difficulty: "Hard",
+    type: "outlier",
+    items: ["circle", "triangle", "square", "circle", "triangle", "square", "circle", "square", "square", "circle", "triangle", "square"],
+    itemsLabel: "Repeating circle, triangle, square cycle with one outlier",
+    answer: 7,
+    hint: "Read the row in groups of three: circle, triangle, square. Which group changes its middle beat?",
+    success: "You caught it — the middle shape in that group should have been a triangle!"
+  },
+  {
+    id: "connect-one",
+    number: "05",
+    kicker: "Act III · Level 5 · Connect",
+    title: "Connect the grid",
     narrative: "The final composition alternates across every row and column. Restore both missing pieces to bring it into harmony.",
     instruction: "Complete the two glowing spaces, one at a time.",
     badge: "Complete",
+    difficulty: "Hard",
     type: "connect",
+    size: 3,
     grid: ["circle", "triangle", "circle", "triangle", null, "triangle", "circle", null, "circle"],
     steps: [
       { index: 4, answer: "circle" },
@@ -47,6 +86,32 @@ const PUZZLES = [
     choices: ["square", "circle", "triangle"],
     hint: "Look both across and down: circle and triangle always take turns.",
     success: "Every row and column now shares the same visual rhythm. Harmony restored!"
+  },
+  {
+    id: "connect-two",
+    number: "06",
+    kicker: "Act III · Level 6 · Master pattern",
+    title: "Restore the system",
+    narrative: "The world reveals its largest rule: a three-shape cycle moving across four rows and four columns.",
+    instruction: "Restore all three missing positions in the final system.",
+    badge: "Synthesize",
+    difficulty: "Expert",
+    type: "connect",
+    size: 4,
+    grid: [
+      "circle", "triangle", "square", "circle",
+      "triangle", null, "circle", "triangle",
+      "square", null, "triangle", "square",
+      "circle", "triangle", null, "circle"
+    ],
+    steps: [
+      { index: 5, answer: "square" },
+      { index: 9, answer: "circle" },
+      { index: 14, answer: "square" }
+    ],
+    choices: ["triangle", "square", "circle"],
+    hint: "Trace any complete row: circle, triangle, square, then the cycle begins again. Each new row starts one step later.",
+    success: "You restored the master pattern — every row and column now belongs to the same living system!"
   }
 ];
 
@@ -195,13 +260,15 @@ function renderStage() {
   const puzzle = PUZZLES[state.stage];
   state.locked = false;
   state.completingStage = false;
+  state.connectStep = 0;
+  state.connectAnswers = {};
   elements.puzzleCard.classList.remove("is-celebrating");
-  elements.counter.textContent = `${puzzle.number} / 03`;
+  elements.counter.textContent = `${puzzle.number} / ${String(PUZZLES.length).padStart(2, "0")}`;
   elements.kicker.textContent = puzzle.kicker;
   elements.title.textContent = puzzle.title;
   elements.narrative.textContent = puzzle.narrative;
   elements.instruction.textContent = puzzle.instruction;
-  elements.badge.textContent = puzzle.badge;
+  elements.badge.textContent = `${puzzle.badge} · ${puzzle.difficulty}`;
   setFeedback("Take your time. The pattern is waiting.");
   updateProgress();
 
@@ -218,7 +285,7 @@ function renderSequence(puzzle) {
 
   elements.board.innerHTML = `
     <div class="sequence-layout">
-      <div class="sequence-row" aria-label="Circle, triangle, circle, triangle, missing shape">${sequence}</div>
+      <div class="sequence-row${puzzle.sequence.length > 6 ? " is-long" : ""}" aria-label="${puzzle.sequenceLabel}">${sequence}</div>
       <div class="choice-area">
         <p class="choice-label">Choose the next beat</p>
         <div class="choice-row">${puzzle.choices.map(makeChoice).join("")}</div>
@@ -228,7 +295,7 @@ function renderSequence(puzzle) {
 
 function renderOutlier(puzzle) {
   elements.board.innerHTML = `
-    <div class="odd-grid" aria-label="Alternating row of shapes">
+    <div class="odd-grid" aria-label="${puzzle.itemsLabel}">
       ${puzzle.items.map((shape, index) => `
         <button class="odd-token" type="button" data-index="${index + 1}" data-item-index="${index}" aria-label="Shape ${index + 1}: ${shape}">
           ${makeToken(shape)}
@@ -249,10 +316,10 @@ function renderConnect(puzzle) {
 
   elements.board.innerHTML = `
     <div class="connect-layout">
-      <div class="pattern-grid" aria-label="Three by three alternating pattern">${grid}</div>
+      <div class="pattern-grid" style="--grid-size:${puzzle.size}" aria-label="${puzzle.size} by ${puzzle.size} visual pattern">${grid}</div>
       <div class="connect-choices">
-        <h3>${activeStep ? `Missing piece ${state.connectStep + 1} of 2` : "Pattern complete"}</h3>
-        <p>Which shape keeps both its row and column in rhythm?</p>
+        <h3>${activeStep ? `Missing piece ${state.connectStep + 1} of ${puzzle.steps.length}` : "Pattern complete"}</h3>
+        <p>Which shape keeps its row and column in rhythm?</p>
         <div class="choice-row">${puzzle.choices.map(makeChoice).join("")}</div>
       </div>
     </div>`;
@@ -316,7 +383,8 @@ function checkConnect(button, puzzle) {
     if (state.connectStep < puzzle.steps.length) {
       state.locked = false;
       renderConnect(puzzle);
-      setFeedback("One connection found. Now complete the final glowing space.", "correct");
+      const remaining = puzzle.steps.length - state.connectStep;
+      setFeedback(`Connection found. ${remaining} missing ${remaining === 1 ? "piece remains" : "pieces remain"}.`, "correct");
     } else {
       renderConnect(puzzle);
       completeStage(puzzle);
