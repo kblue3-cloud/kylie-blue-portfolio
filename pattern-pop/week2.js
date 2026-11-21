@@ -148,6 +148,71 @@ const PUZZLES = [
     ],
     hint: "Read in groups of three: circle, triangle, square. Two groups are borrowing a neighbor’s shape.",
     success: "Both false memories dissolve. You can see the system — or perhaps you invented it."
+  },
+  {
+    id: "mirror-memory",
+    number: "09",
+    kicker: "Act V · Level 9 · Dream logic",
+    title: "Mirror the memory",
+    narrative: "The phrase folds inward and returns to where it began. Read each five-beat reflection and complete its final edge.",
+    instruction: "Which shape closes the mirrored five-beat phrase?",
+    badge: "Reflect",
+    difficulty: "Master",
+    type: "sequence",
+    sequence: ["circle", "triangle", "square", "triangle", "circle", "circle", "triangle", "square", "triangle", "circle", "circle", "triangle", "square", "triangle", null],
+    sequenceLabel: "Three mirrored groups of circle, triangle, square, triangle, circle with the final shape missing",
+    choices: ["triangle", "circle", "square"],
+    answer: "circle",
+    hint: "Split the line into groups of five. Each group reads the same forward and backward.",
+    success: "The reflection closes on a circle. The memory now reads the same in both directions."
+  },
+  {
+    id: "triple-drift",
+    number: "10",
+    kicker: "Act V · Level 10 · Unstable vision",
+    title: "Catch the drift",
+    narrative: "A reversed cycle is drifting out of focus. Three shapes have borrowed the identity of a nearby beat.",
+    instruction: "Find all three shapes that break the reversed cycle.",
+    badge: "Recheck",
+    difficulty: "Master",
+    type: "anomalies",
+    items: ["square", "triangle", "circle", "square", "circle", "circle", "square", "triangle", "circle", "square", "triangle", "square", "square", "triangle", "circle", "triangle", "triangle", "circle"],
+    itemsLabel: "Six groups of a square, triangle, circle cycle containing three anomalies",
+    answers: [
+      { index: 4, shape: "triangle" },
+      { index: 11, shape: "circle" },
+      { index: 15, shape: "square" }
+    ],
+    hint: "Read in groups of three: square, triangle, circle. Three positions have drifted away from that order.",
+    success: "All three drifting shapes return. The image holds still — just long enough to believe it."
+  },
+  {
+    id: "dream-grid",
+    number: "11",
+    kicker: "Act V · Level 11 · Final dream",
+    title: "Restore the dream",
+    narrative: "The last system spreads across twenty-five positions. Restore four gaps while the cycle moves diagonally through the field.",
+    instruction: "Restore all four missing positions in the 5 by 5 dream.",
+    badge: "Awaken",
+    difficulty: "Final",
+    type: "connect",
+    size: 5,
+    grid: [
+      "circle", "triangle", "square", "circle", "triangle",
+      "triangle", null, "circle", "triangle", "square",
+      "square", "circle", null, "square", "circle",
+      "circle", "triangle", "square", null, "triangle",
+      "triangle", null, "circle", "triangle", "square"
+    ],
+    steps: [
+      { index: 6, answer: "square" },
+      { index: 12, answer: "triangle" },
+      { index: 18, answer: "circle" },
+      { index: 21, answer: "square" }
+    ],
+    choices: ["circle", "triangle", "square"],
+    hint: "Follow the diagonal shift: each row begins one shape later in the circle, triangle, square cycle.",
+    success: "The twenty-five-piece dream is complete. Every line agrees — perhaps a little too perfectly."
   }
 ];
 
@@ -286,7 +351,7 @@ function resetGame(startImmediately = false) {
   elements.secretReward.hidden = true;
   elements.secretRewardLabel.textContent = "Hidden ending found";
   elements.endingArt.querySelectorAll(".reward-echo").forEach((echo) => echo.remove());
-  elements.endingMessage.textContent = "You restored all eight patterns. But were those connections always there?";
+  elements.endingMessage.textContent = "You restored all eleven patterns. But were those connections always there?";
   if (startImmediately) {
     renderStage();
     setScreen("puzzle");

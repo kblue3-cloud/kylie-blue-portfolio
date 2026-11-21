@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#FFF9EF" />
-    <meta name="description" content="Pattern Pop — the final eight-level visual puzzle about perception, invented patterns, and hallucination." />
+    <meta name="description" content="Pattern Pop — the final eleven-level visual puzzle about perception, invented patterns, and hallucination." />
     <title>Pattern Pop — Final Game</title>
     <link rel="stylesheet" href="week2.css" />
     <script src="week2.js" defer></script>
@@ -35,7 +35,7 @@
       <main class="screen-container">
         <section class="screen opening-screen is-active" data-screen="opening" aria-labelledby="opening-title">
           <div class="opening-copy">
-            <p class="kicker"><span>01</span> Hallucination · Four acts · Eight evolving puzzles</p>
+            <p class="kicker"><span>01</span> Hallucination · Five acts · Eleven evolving puzzles</p>
             <h1 id="opening-title" tabindex="-1"><span>PATTERN</span><span>POP<i aria-hidden="true">●</i></span></h1>
             <p class="tagline">What if the pattern is only in your head?</p>
             <div class="opening-actions">
@@ -66,7 +66,7 @@
 
         <section class="screen puzzle-screen" data-screen="puzzle" aria-labelledby="stage-title">
           <div class="stage-intro">
-            <p class="stage-counter" id="stage-counter">01 / 08</p>
+            <p class="stage-counter" id="stage-counter">01 / 11</p>
             <div>
               <p class="stage-kicker" id="stage-kicker"></p>
               <h2 id="stage-title" tabindex="-1"></h2>
@@ -108,9 +108,9 @@
           </div>
 
           <div class="ending-copy">
-            <p class="kicker"><span>08</span> The world is in tune</p>
+            <p class="kicker"><span>11</span> The world is in tune</p>
             <h2 id="ending-title" tabindex="-1">EVERY PATTERN<br />HAS A <em>STORY.</em></h2>
-            <p class="ending-message">You restored all eight patterns. But were those connections always there?</p>
+            <p class="ending-message">You restored all eleven patterns. But were those connections always there?</p>
             <div class="secret-reward" hidden role="status">
               <span>Hidden ending found</span>
               <strong>THE PATTERN WAS YOU.</strong>
@@ -137,8 +137,8 @@
         </div>
         <div class="process-grid">
           <article><span>01 / Feedback + testing</span><p>I focused on the professor’s request for a playful surprise after the final level. Testing also showed that new players benefited from a clearer first action, a longer difficulty arc, and a stronger signal that every level was building toward one idea.</p></article>
-          <article><span>02 / Changes</span><p>I expanded the Week 2 game from six to eight levels with a fourth “Hallucination” act, added an advanced echo sequence and a two-anomaly puzzle, refined the response copy, and created a hidden ending that keeps reacting when the player taps its center.</p></article>
-          <article><span>03 / AI + my decisions</span><p>I used ChatGPT/Codex to audit the full interaction path, implement accessible HTML/CSS/JavaScript, and test desktop and mobile behavior. I chose the concept, puzzle rules, visual language, eight-level progression, pacing, wording, and interactive hidden-reward direction.</p></article>
+          <article><span>02 / Changes</span><p>I expanded the Week 2 game from six to eleven levels across two new acts. The additions introduce echo and mirror sequences, multi-anomaly perception tests, a 5×5 final system, refined response copy, and a hidden ending that keeps reacting when the player taps its center.</p></article>
+          <article><span>03 / AI + my decisions</span><p>I used ChatGPT/Codex to audit the full interaction path, implement accessible HTML/CSS/JavaScript, and test desktop and mobile behavior. I chose the concept, puzzle rules, visual language, eleven-level progression, pacing, wording, and interactive hidden-reward direction.</p></article>
         </div>
         <button class="primary-button process-close" type="button" data-action="close-process"><span>Return to game</span><span aria-hidden="true">→</span></button>
       </div>
