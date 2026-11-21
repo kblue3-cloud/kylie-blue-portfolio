@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#FFF9EF" />
+    <meta name="description" content="Pattern Pop — the final eleven-level visual puzzle about perception, invented patterns, and hallucination." />
+    <title>Pattern Pop — Final Game</title>
+    <link rel="stylesheet" href="week2.css" />
+    <script src="week2.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#game">Skip to game</a>
+
+    <div class="world" id="game" aria-live="polite">
+      <header class="topbar">
+        <button class="brand" type="button" data-action="home" aria-label="Return to Pattern Pop start screen">
+          <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span>PATTERN POP</span>
+        </button>
+
+        <div class="game-controls">
+          <a class="control-button portfolio-control" href="../index.html">Portfolio ↗</a>
+          <button class="control-button process-control" type="button" data-action="process">Process</button>
+          <button class="control-button restart-control is-hidden" type="button" data-action="restart">
+            <span aria-hidden="true">↻</span> Restart
+          </button>
+          <button class="control-button sound-control" type="button" data-action="sound" aria-pressed="false" aria-label="Turn sound on">
+            <span class="sound-icon" aria-hidden="true">◖</span>
+            <span class="sound-label">Sound off</span>
+          </button>
+        </div>
+      </header>
+
+      <main class="screen-container">
+        <section class="screen opening-screen is-active" data-screen="opening" aria-labelledby="opening-title">
+          <div class="opening-copy">
+            <p class="kicker"><span>01</span> Hallucination · Five acts · Eleven evolving puzzles</p>
+            <h1 id="opening-title" tabindex="-1"><span>PATTERN</span><span>POP<i aria-hidden="true">●</i></span></h1>
+            <p class="tagline">What if the pattern is only in your head?</p>
+            <div class="opening-actions">
+              <button class="primary-button" type="button" data-action="start">
+                <span>Enter the world</span><span aria-hidden="true">→</span>
+              </button>
+              <p>Look closer. Find what connects.</p>
+            </div>
+            <ol class="how-to-play" aria-label="How to play">
+              <li><span>1</span><strong>Observe</strong><small>Read the visual rule.</small></li>
+              <li><span>2</span><strong>Select</strong><small>Click or tap a shape.</small></li>
+              <li><span>3</span><strong>Reconsider</strong><small>Use each response as a clue.</small></li>
+            </ol>
+          </div>
+
+          <div class="hero-art" aria-hidden="true">
+            <div class="art-orbit orbit-one"><span class="shape shape-circle coral"></span></div>
+            <div class="art-orbit orbit-two"><span class="shape shape-triangle cobalt"></span></div>
+            <div class="art-orbit orbit-three"><span class="shape shape-square yellow"></span></div>
+            <div class="hero-blob turquoise"></div>
+            <div class="hero-ring"></div>
+            <div class="hero-dot-grid"></div>
+            <span class="spark spark-one">✦</span><span class="spark spark-two">✦</span>
+          </div>
+
+          <p class="opening-footnote">Observe · Select · Restore</p>
+        </section>
+
+        <section class="screen puzzle-screen" data-screen="puzzle" aria-labelledby="stage-title">
+          <div class="stage-intro">
+            <p class="stage-counter" id="stage-counter">01 / 11</p>
+            <div>
+              <p class="stage-kicker" id="stage-kicker"></p>
+              <h2 id="stage-title" tabindex="-1"></h2>
+            </div>
+            <p class="stage-narrative" id="stage-narrative"></p>
+          </div>
+
+          <div class="puzzle-card" id="puzzle-card">
+            <div class="card-topline">
+              <p id="puzzle-instruction"></p>
+              <span class="pattern-badge" id="pattern-badge">Repeat</span>
+            </div>
+            <div class="puzzle-board" id="puzzle-board"></div>
+            <div class="feedback" id="feedback" role="status" aria-live="assertive">
+              <span class="feedback-icon" aria-hidden="true">✦</span>
+              <span class="feedback-text">Take your time. The pattern is waiting.</span>
+            </div>
+          </div>
+
+          <div class="stage-progress" aria-label="Game progress">
+            <span class="progress-line"><i id="progress-fill"></i></span>
+            <span id="progress-label">World restored: 0%</span>
+          </div>
+        </section>
+
+        <section class="screen ending-screen" data-screen="ending" aria-labelledby="ending-title">
+          <div class="ending-art">
+            <button class="ending-sun" type="button" data-action="secret" aria-label="Touch the glowing center to reveal a hidden ending">
+              <span aria-hidden="true">?</span>
+            </button>
+            <div class="ending-orbit" aria-hidden="true"></div>
+            <span class="ending-shape e-one shape shape-circle coral" aria-hidden="true"></span>
+            <span class="ending-shape e-two shape shape-triangle cobalt" aria-hidden="true"></span>
+            <span class="ending-shape e-three shape shape-square yellow" aria-hidden="true"></span>
+            <span class="ending-shape e-four shape shape-diamond lavender" aria-hidden="true"></span>
+            <span class="ending-shape e-five shape shape-circle turquoise" aria-hidden="true"></span>
+            <span class="ending-spark" aria-hidden="true">✦</span>
+            <p class="secret-hint">One last pattern is hiding. Touch the center.</p>
+          </div>
+
+          <div class="ending-copy">
+            <p class="kicker"><span>11</span> The world is in tune</p>
+            <h2 id="ending-title" tabindex="-1">EVERY PATTERN<br />HAS A <em>STORY.</em></h2>
+            <p class="ending-message">You restored all eleven patterns. But were those connections always there?</p>
+            <div class="secret-reward" hidden role="status">
+              <span>Hidden ending found</span>
+              <strong>THE PATTERN WAS YOU.</strong>
+              <p>Your mind turned noise into order. That is the hallucination. Touch the center again and make the pattern echo.</p>
+            </div>
+            <div class="ending-actions">
+              <button class="primary-button" type="button" data-action="play-again">
+                <span>Play again</span><span aria-hidden="true">↻</span>
+              </button>
+              <button class="text-button" type="button" data-action="home">Back to start</button>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <div class="transition-wipe" aria-hidden="true"><span></span><span></span><span></span></div>
+    </div>
+
+    <dialog class="process-dialog" id="process-note" aria-labelledby="process-title">
+      <div class="process-card">
+        <div class="process-heading">
+          <div><p>Final revision / Week 3</p><h2 id="process-title">Process note</h2></div>
+          <button type="button" data-action="close-process" aria-label="Close process note">×</button>
+        </div>
+        <div class="process-grid">
+          <article><span>01 / Feedback + testing</span><p>I focused on the professor’s request for a playful surprise after the final level. Testing also showed that new players benefited from a clearer first action, a longer difficulty arc, and a stronger signal that every level was building toward one idea.</p></article>
+          <article><span>02 / Changes</span><p>I expanded the Week 2 game from six to eleven levels across two new acts. The additions introduce echo and mirror sequences, multi-anomaly perception tests, a 5×5 final system, refined response copy, and a hidden ending that keeps reacting when the player taps its center.</p></article>
+          <article><span>03 / AI + my decisions</span><p>I used ChatGPT/Codex to audit the full interaction path, implement accessible HTML/CSS/JavaScript, and test desktop and mobile behavior. I chose the concept, puzzle rules, visual language, eleven-level progression, pacing, wording, and interactive hidden-reward direction.</p></article>
+        </div>
+        <button class="primary-button process-close" type="button" data-action="close-process"><span>Return to game</span><span aria-hidden="true">→</span></button>
+      </div>
+    </dialog>
+  </body>
+</html>
