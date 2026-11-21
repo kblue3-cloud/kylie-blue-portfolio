@@ -190,6 +190,15 @@ h1:focus, h2:focus { outline: none; }
 .odd-token::after { content: attr(data-index); position: absolute; bottom: -2px; right: 2px; display: grid; place-items: center; width: 19px; height: 19px; border: 1.5px solid var(--ink); border-radius: 50%; color: var(--ink); background: var(--cream); font-size: 8px; font-weight: 900; }
 .odd-token.is-transformed .token-shape { animation: morph-shape 700ms var(--ease) both; }
 @keyframes morph-shape { 35% { transform: scale(.2) rotate(120deg); } 100% { transform: scale(1) rotate(0); border-radius: 50%; background: var(--turquoise); } }
+.anomaly-layout { width: 100%; display: grid; gap: 18px; }
+.anomaly-status { width: min(760px, 100%); margin: 0 auto; padding: 11px 16px; display: flex; align-items: center; justify-content: space-between; gap: 18px; border: 2px solid var(--ink); border-radius: 99px; background: rgba(185,160,248,.3); }
+.anomaly-status strong { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
+.anomaly-status span { color: var(--muted); font-size: 9px; font-weight: 700; }
+.anomaly-grid { max-width: 1080px; gap: clamp(4px, 1.1vw, 14px); }
+.anomaly-grid .odd-token { width: clamp(52px, 6vw, 78px); }
+.anomaly-grid .odd-token.is-repaired:disabled { opacity: 1; cursor: default; background: rgba(72,218,208,.48); }
+.anomaly-grid .odd-token.is-repaired .token-shape { animation: repair-memory 700ms var(--ease) both; }
+@keyframes repair-memory { 0% { transform: scale(.15) rotate(-100deg); filter: blur(8px); } 65% { transform: scale(1.18) rotate(8deg); filter: blur(0); } 100% { transform: scale(1); } }
 
 .connect-layout { width: 100%; display: grid; grid-template-columns: minmax(240px, 1fr) minmax(260px, .8fr); align-items: center; gap: clamp(26px, 5vw, 80px); }
 .pattern-grid { justify-self: end; display: grid; grid-template-columns: repeat(var(--grid-size, 3), clamp(52px, 5.8vw, 78px)); gap: 8px; padding: 12px; border: 2px solid var(--ink); border-radius: 22px; background: var(--ink); }
@@ -234,6 +243,16 @@ h1:focus, h2:focus { outline: none; }
 .ending-screen.is-hallucinating .ending-shape { animation-duration: 1.25s; filter: drop-shadow(-8px 9px 0 var(--cobalt)); }
 .ending-screen.is-hallucinating .e-one, .ending-screen.is-hallucinating .e-three { animation-direction: reverse; }
 .ending-screen.is-hallucinating .secret-hint { visibility: hidden; }
+.reward-echo { position: absolute; z-index: 8; left: 50%; top: 50%; pointer-events: none; font-size: clamp(28px, 4vw, 58px); line-height: 1; filter: drop-shadow(4px 5px 0 var(--ink)); animation: reward-echo 1.65s var(--ease) both; }
+.reward-echo.echo-0 { color: var(--coral); }
+.reward-echo.echo-1 { color: var(--cobalt); }
+.reward-echo.echo-2 { color: var(--yellow); }
+.reward-echo.echo-3 { color: var(--turquoise); }
+@keyframes reward-echo {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(.2) rotate(0); }
+  24% { opacity: 1; transform: translate(-50%, -50%) scale(1.2) rotate(18deg); }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--echo-x)), calc(-50% + var(--echo-y))) scale(.55) rotate(var(--echo-rotate)); }
+}
 @keyframes secret-sun { 0%, 100% { transform: scale(.96) rotate(-2deg); } 50% { transform: scale(1.08) rotate(3deg); } }
 @keyframes hallucination-field { to { transform: rotate(360deg) scale(1.06); } }
 .ending-actions { display: flex; align-items: center; gap: 24px; }
@@ -304,6 +323,8 @@ h1:focus, h2:focus { outline: none; }
   .token, .choice-token, .odd-token, .grid-token { width: 54px; }
   .odd-grid { gap: 6px; }
   .odd-token { width: 61px; }
+  .anomaly-status { align-items: flex-start; flex-direction: column; gap: 3px; border-radius: 16px; }
+  .anomaly-grid .odd-token { width: 52px; }
   .connect-layout { grid-template-columns: 1fr; gap: 20px; }
   .pattern-grid { justify-self: center; grid-template-columns: repeat(var(--grid-size, 3), 52px); }
   .connect-choices { text-align: center; }

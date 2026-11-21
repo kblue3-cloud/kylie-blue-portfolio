@@ -92,7 +92,7 @@ const PUZZLES = [
     number: "06",
     kicker: "Act III · Level 6 · Master pattern",
     title: "Restore the system",
-    narrative: "The world reveals its largest rule: a three-shape cycle moving across four rows and four columns.",
+    narrative: "The world reveals a larger rule: a three-shape cycle moving across four rows and four columns.",
     instruction: "Restore all three missing positions in the final system.",
     badge: "Synthesize",
     difficulty: "Expert",
@@ -112,6 +112,42 @@ const PUZZLES = [
     choices: ["triangle", "square", "circle"],
     hint: "Trace any complete row: circle, triangle, square, then the cycle begins again. Each new row starts one step later.",
     success: "You restored the master pattern — every row and column now belongs to the same living system!"
+  },
+  {
+    id: "echo-sequence",
+    number: "07",
+    kicker: "Act IV · Level 7 · Hallucination",
+    title: "Follow the echo",
+    narrative: "The system begins repeating its own memory. A four-beat phrase returns like an afterimage — complete the final echo.",
+    instruction: "Which shape completes the repeated four-beat phrase?",
+    badge: "Echo",
+    difficulty: "Expert",
+    type: "sequence",
+    sequence: ["circle", "triangle", "square", "triangle", "circle", "triangle", "square", "triangle", "circle", "triangle", "square", null],
+    sequenceLabel: "Three repeated groups of circle, triangle, square, triangle with the final shape missing",
+    choices: ["square", "circle", "triangle"],
+    answer: "triangle",
+    hint: "Group the line into sets of four. The same phrase is echoing three times.",
+    success: "The echo closes — circle, triangle, square, triangle returns exactly as your mind expected."
+  },
+  {
+    id: "double-illusion",
+    number: "08",
+    kicker: "Act IV · Level 8 · Final perception",
+    title: "Break the illusion",
+    narrative: "The final cycle almost looks perfect. Two shapes are pretending to belong — expose both false memories.",
+    instruction: "Find both shapes that break the three-part cycle.",
+    badge: "Doubt",
+    difficulty: "Master",
+    type: "anomalies",
+    items: ["circle", "triangle", "square", "circle", "triangle", "square", "circle", "square", "square", "circle", "triangle", "square", "triangle", "triangle", "square"],
+    itemsLabel: "Five groups of a circle, triangle, square cycle containing two anomalies",
+    answers: [
+      { index: 7, shape: "triangle" },
+      { index: 12, shape: "circle" }
+    ],
+    hint: "Read in groups of three: circle, triangle, square. Two groups are borrowing a neighbor’s shape.",
+    success: "Both false memories dissolve. You can see the system — or perhaps you invented it."
   }
 ];
 
@@ -131,8 +167,10 @@ const state = {
   completingStage: false,
   sound: false,
   secretRevealed: false,
+  secretEchoes: 0,
   connectStep: 0,
-  connectAnswers: {}
+  connectAnswers: {},
+  anomalyAnswers: {}
 };
 
 const elements = {
@@ -159,6 +197,8 @@ const elements = {
   endingMessage: document.querySelector(".ending-message"),
   secretButton: document.querySelector(".ending-sun"),
   secretReward: document.querySelector(".secret-reward"),
+  secretRewardLabel: document.querySelector(".secret-reward span"),
+  endingArt: document.querySelector(".ending-art"),
   processDialog: document.querySelector("#process-note")
 };
 
@@ -236,14 +276,17 @@ function resetGame(startImmediately = false) {
   state.locked = false;
   state.completingStage = false;
   state.secretRevealed = false;
+  state.secretEchoes = 0;
   state.connectStep = 0;
   state.connectAnswers = {};
+  state.anomalyAnswers = {};
   elements.puzzleCard.classList.remove("is-celebrating");
   elements.endingScreen.classList.remove("is-hallucinating");
-  elements.secretButton.disabled = false;
   elements.secretButton.setAttribute("aria-label", "Touch the glowing center to reveal a hidden ending");
   elements.secretReward.hidden = true;
-  elements.endingMessage.textContent = "You restored all six patterns. But were those connections always there?";
+  elements.secretRewardLabel.textContent = "Hidden ending found";
+  elements.endingArt.querySelectorAll(".reward-echo").forEach((echo) => echo.remove());
+  elements.endingMessage.textContent = "You restored all eight patterns. But were those connections always there?";
   if (startImmediately) {
     renderStage();
     setScreen("puzzle");
@@ -253,11 +296,13 @@ function resetGame(startImmediately = false) {
 }
 
 function revealSecret() {
-  if (state.secretRevealed) return;
+  if (state.secretRevealed) {
+    spawnEcho();
+    return;
+  }
   state.secretRevealed = true;
   elements.endingScreen.classList.add("is-hallucinating");
-  elements.secretButton.disabled = true;
-  elements.secretButton.setAttribute("aria-label", "Hidden ending revealed");
+  elements.secretButton.setAttribute("aria-label", "Press again to make the pattern echo");
   elements.endingMessage.textContent = "The system slips out of rhythm. The world was never fixed — your attention made it coherent.";
   elements.secretReward.hidden = false;
   playSound("secret");
@@ -268,6 +313,24 @@ function revealSecret() {
     ],
     { duration: 650, easing: "cubic-bezier(.22,1,.36,1)", fill: "both" }
   );
+}
+
+function spawnEcho() {
+  const glyphs = ["●", "▲", "■", "✦"];
+  const echo = document.createElement("span");
+  const angle = Math.random() * Math.PI * 2;
+  const distance = 120 + Math.random() * 150;
+  echo.className = `reward-echo echo-${state.secretEchoes % 4}`;
+  echo.textContent = glyphs[state.secretEchoes % glyphs.length];
+  echo.setAttribute("aria-hidden", "true");
+  echo.style.setProperty("--echo-x", `${Math.cos(angle) * distance}px`);
+  echo.style.setProperty("--echo-y", `${Math.sin(angle) * distance}px`);
+  echo.style.setProperty("--echo-rotate", `${Math.round(Math.random() * 240 - 120)}deg`);
+  elements.endingArt.append(echo);
+  state.secretEchoes += 1;
+  elements.secretRewardLabel.textContent = state.secretEchoes < 3 ? `Pattern echo ${state.secretEchoes}` : "The pattern is alive";
+  playSound("pop");
+  window.setTimeout(() => echo.remove(), reduceMotion ? 150 : 1700);
 }
 
 function openProcess() {
@@ -307,6 +370,7 @@ function renderStage() {
   state.completingStage = false;
   state.connectStep = 0;
   state.connectAnswers = {};
+  state.anomalyAnswers = {};
   elements.puzzleCard.classList.remove("is-celebrating");
   elements.counter.textContent = `${puzzle.number} / ${String(PUZZLES.length).padStart(2, "0")}`;
   elements.kicker.textContent = puzzle.kicker;
@@ -320,6 +384,7 @@ function renderStage() {
   if (puzzle.type === "sequence") renderSequence(puzzle);
   if (puzzle.type === "outlier") renderOutlier(puzzle);
   if (puzzle.type === "connect") renderConnect(puzzle);
+  if (puzzle.type === "anomalies") renderAnomalies(puzzle);
 }
 
 function renderSequence(puzzle) {
@@ -345,6 +410,23 @@ function renderOutlier(puzzle) {
         <button class="odd-token" type="button" data-index="${index + 1}" data-item-index="${index}" aria-label="Shape ${index + 1}: ${shape}">
           ${makeToken(shape)}
         </button>`).join("")}
+    </div>`;
+}
+
+function renderAnomalies(puzzle) {
+  const found = Object.keys(state.anomalyAnswers).length;
+  const remaining = puzzle.answers.length - found;
+  elements.board.innerHTML = `
+    <div class="anomaly-layout">
+      <div class="anomaly-status"><strong>${remaining} illusion${remaining === 1 ? "" : "s"} remaining</strong><span>Correct choices repair themselves.</span></div>
+      <div class="odd-grid anomaly-grid" aria-label="${puzzle.itemsLabel}">
+        ${puzzle.items.map((shape, index) => {
+          const repaired = state.anomalyAnswers[index];
+          return `<button class="odd-token${repaired ? " is-correct is-repaired" : ""}" type="button" data-index="${index + 1}" data-item-index="${index}" aria-label="Shape ${index + 1}: ${repaired || shape}${repaired ? ", repaired" : ""}" ${repaired ? "disabled" : ""}>
+            ${makeToken(repaired || shape)}
+          </button>`;
+        }).join("")}
+      </div>
     </div>`;
 }
 
@@ -378,6 +460,7 @@ function handleChoice(button) {
   if (puzzle.type === "sequence") checkSequence(button, puzzle);
   if (puzzle.type === "outlier") checkOutlier(button, puzzle);
   if (puzzle.type === "connect") checkConnect(button, puzzle);
+  if (puzzle.type === "anomalies") checkAnomaly(button, puzzle);
 }
 
 function markWrong(button, hint) {
@@ -408,6 +491,31 @@ function checkOutlier(button, puzzle) {
   }
   button.classList.add("is-correct", "is-transformed");
   completeStage(puzzle);
+}
+
+function checkAnomaly(button, puzzle) {
+  const selected = Number(button.dataset.itemIndex);
+  const answer = puzzle.answers.find((item) => item.index === selected);
+  if (!answer || state.anomalyAnswers[selected]) {
+    markWrong(button, puzzle.hint);
+    return;
+  }
+
+  state.anomalyAnswers[selected] = answer.shape;
+  button.classList.add("is-correct", "is-transformed");
+  const remaining = puzzle.answers.length - Object.keys(state.anomalyAnswers).length;
+  setFeedback(remaining ? `You exposed one false memory. ${remaining} illusion remains.` : "Both illusions are exposed. The cycle is repairing itself.", "correct");
+  playSound("correct");
+  state.locked = true;
+
+  window.setTimeout(() => {
+    renderAnomalies(puzzle);
+    if (remaining === 0) completeStage(puzzle);
+    else {
+      state.locked = false;
+      setFeedback("One repaired shape is glowing. Find the final false memory.", "correct");
+    }
+  }, reduceMotion ? 80 : 650);
 }
 
 function checkConnect(button, puzzle) {
