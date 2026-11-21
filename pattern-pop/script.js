@@ -65,6 +65,7 @@ const state = {
   locked: false,
   completingStage: false,
   sound: false,
+  secretRevealed: false,
   connectStep: 0,
   connectAnswers: {}
 };
@@ -88,7 +89,12 @@ const elements = {
   puzzleCard: document.querySelector("#puzzle-card"),
   progressFill: document.querySelector("#progress-fill"),
   progressLabel: document.querySelector("#progress-label"),
-  wipe: document.querySelector(".transition-wipe")
+  wipe: document.querySelector(".transition-wipe"),
+  endingScreen: document.querySelector(".ending-screen"),
+  endingMessage: document.querySelector(".ending-message"),
+  secretButton: document.querySelector(".ending-sun"),
+  secretReward: document.querySelector(".secret-reward"),
+  processDialog: document.querySelector("#process-note")
 };
 
 let audioContext = null;
@@ -123,6 +129,11 @@ function playSound(kind) {
   if (kind === "celebrate") {
     [523, 659, 784, 1047].forEach((tone, index) => {
       window.setTimeout(() => createTone(tone, 0.35, { endFrequency: tone * 1.04, volume: 0.035 }), index * 90);
+    });
+  }
+  if (kind === "secret") {
+    [880, 660, 990, 523].forEach((tone, index) => {
+      window.setTimeout(() => createTone(tone, 0.48, { endFrequency: tone * 0.72, type: "triangle", volume: 0.035 }), index * 105);
     });
   }
 }
@@ -161,13 +172,47 @@ function resetGame(startImmediately = false) {
   state.completingStage = false;
   state.connectStep = 0;
   state.connectAnswers = {};
+  state.secretRevealed = false;
   elements.puzzleCard.classList.remove("is-celebrating");
+  elements.endingScreen.classList.remove("is-hallucinating");
+  elements.secretButton.disabled = false;
+  elements.secretButton.setAttribute("aria-label", "Touch the glowing center to reveal a hidden ending");
+  elements.secretReward.hidden = true;
+  elements.endingMessage.textContent = "You found the connections hiding in plain sight. But were they always there?";
   if (startImmediately) {
     renderStage();
     setScreen("puzzle");
   } else {
     setScreen("opening");
   }
+}
+
+function revealSecret() {
+  if (state.secretRevealed) return;
+  state.secretRevealed = true;
+  elements.endingScreen.classList.add("is-hallucinating");
+  elements.secretButton.disabled = true;
+  elements.secretButton.setAttribute("aria-label", "Hidden ending revealed");
+  elements.endingMessage.textContent = "The shapes slip out of rhythm. The world was never fixed — your attention made it coherent.";
+  elements.secretReward.hidden = false;
+  playSound("secret");
+  if (!reduceMotion) elements.secretReward.animate(
+    [
+      { opacity: 0, transform: "translateY(14px) rotate(-1deg)" },
+      { opacity: 1, transform: "translateY(0) rotate(0)" }
+    ],
+    { duration: 650, easing: "cubic-bezier(.22,1,.36,1)", fill: "both" }
+  );
+}
+
+function openProcess() {
+  if (typeof elements.processDialog.showModal === "function") elements.processDialog.showModal();
+  else elements.processDialog.setAttribute("open", "");
+}
+
+function closeProcess() {
+  if (typeof elements.processDialog.close === "function") elements.processDialog.close();
+  else elements.processDialog.removeAttribute("open");
 }
 
 function makeToken(shape, extraClass = "") {
@@ -356,13 +401,20 @@ document.addEventListener("click", (event) => {
   if (action === "play-again") resetGame(true);
   if (action === "home") resetGame(false);
   if (action === "sound") toggleSound();
+  if (action === "secret") revealSecret();
+  if (action === "process") openProcess();
+  if (action === "close-process") closeProcess();
 
   const choice = event.target.closest(".choice-token, .odd-token");
   if (choice) handleChoice(choice);
 });
 
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && state.screen !== "opening") resetGame(false);
+  if (event.key === "Escape" && !elements.processDialog.open && state.screen !== "opening") resetGame(false);
+});
+
+elements.processDialog.addEventListener("click", (event) => {
+  if (event.target === elements.processDialog) closeProcess();
 });
 
 setScreen("opening", false);
